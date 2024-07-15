@@ -30,6 +30,7 @@ function Form() {
                 <form onSubmit={Submission}>
                     <label>Quantity: </label>
                     <input type="number" value={qty} placeholder="Enter Quantity" onChange={Quantity} required />
+
                     <label>Item Name: </label>
                     <input type="text" value={name} placeholder="Enter Item" onChange={ItemName} required />
                     <button type="submit">Add</button>

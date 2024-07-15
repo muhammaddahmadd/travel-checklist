@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 
-function Items({ item }) {
+function Items({ item, key }) {
     // const { item.name, item.qunatity } = {qunatity}
+    const [checked, setChecked] = useState(false);
+
+    function handleChecked() {
+        setChecked(!checked);
+        console.log("item box is checked")
+    }
+
+
     return (
-        <li >{item.Item}- {item.Quantity}</li>
+        <li className={`${checked ? "checked" : ""}`}> <input type="checkbox" id={key} name="checkbox" onSelect={handleChecked} />{item.Item}- {item.Quantity}</li>
     )
 }
 
