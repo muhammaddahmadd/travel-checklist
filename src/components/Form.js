@@ -27,7 +27,7 @@ function Form() {
     return (
         <div>
             <>
-                <form onSubmit={Submission}>
+                <form onSubmit={Submission} className="add-form">
                     <label>Quantity: </label>
                     <input type="number" value={qty} placeholder="Enter Quantity" onChange={Quantity} required />
                     <label>Item Name: </label>
@@ -35,11 +35,12 @@ function Form() {
                     <button type="submit">Add</button>
                 </form>
 
-                {
-                    item.map((item, index) => (
-                        <Items item={item} key={index} />
-                    )
-                    )}
+               <ul className="list"> 
+                 
+                        <Items items={item}  />
+                 
+
+</ul>
             </>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../src/components/Logo"
 import Form from "../src/components/Form"
 import PackingLists from "../src/components/PackingLists"
@@ -12,7 +12,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className="app">
       <Logo />
       <Form />
       <PackingLists />

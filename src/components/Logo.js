@@ -3,9 +3,9 @@ import React from "react";
 
 function Logo() {
     return (
-        <header>
+        <h1 >
             Packing list
-        </header>
+        </h1>
     )
 }
 
