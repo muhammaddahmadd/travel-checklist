@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Items from "./Items"
+import PackingLists from "./PackingLists";
 
 function Form() {
     const [item, setItem] = useState([])
@@ -35,12 +36,9 @@ function Form() {
                     <button type="submit">Add</button>
                 </form>
 
-               <ul className="list"> 
-                 
-                        <Items items={item}  />
-                 
-
-</ul>
+        
+                     <PackingLists items={item}  />
+          
             </>
         </div>
     )

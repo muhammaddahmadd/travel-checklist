@@ -1,13 +1,21 @@
 import React from "react";
+import Items from "./Items";
 
 
-function PackingLists() {
+function PackingLists({items}) {
 
 
     return (
-        <ul>
-
-        </ul>
+        <div  className="list">
+            <ul>
+        {
+            items.map(items=> (
+                <Items items={items}/>
+            ))
+        }
+            </ul>
+        </div>
+       
     )
 }
 

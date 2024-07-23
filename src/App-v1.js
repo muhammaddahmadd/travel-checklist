@@ -15,7 +15,7 @@ function App() {
     <div className="app">
       <Logo />
       <Form />
-      <PackingLists />
+      {/* <PackingLists /> */}
       <Footer />
     </div>
   )
