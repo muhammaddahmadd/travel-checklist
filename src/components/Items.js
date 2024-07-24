@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 
-function Items({ items }) {
-    const [checked, setChecked] = useState(false)
+function Items({ items, id }) {
+    const [checked, setChecked] = useState({})
     console.log(items); // Just an example of using props inside the component
 
-    function handlechecked(){
-        setChecked(!checked)
+    function handleChecked(id){
+        setChecked([{ ...checked, [id]: !checked[id] }])
     }
+    console.log(id)
 
     return (
-    <li>
-        <input type="checkbox" checked={checked} onChange={handlechecked} />
-        {items.Quantity} - {items.Item}
+        <li>
+            <input
+                type="checkbox"
+                checked={checked}
+                onChange={()=>handleChecked(id)}
+            />
+            {items.Quantity} - {items.Item}
             <button className="close-icon">X</button>
-    </li>
+        </li>
     );
 }
 
