@@ -9,6 +9,8 @@ function Items({ items, id }) {
     }
     console.log(id)
 
+
+    function handleDel(){}
     return (
         <li>
             <input
@@ -17,7 +19,7 @@ function Items({ items, id }) {
                 onChange={()=>handleChecked(id)}
             />
             {items.Quantity} - {items.Item}
-            <button className="close-icon">X</button>
+            <button className="close-icon" onClick={handleDel}>X</button>
         </li>
     );
 }
