@@ -37,6 +37,12 @@ function Form() {
                 <form onSubmit={Submission} className="add-form">
                     <label>Quantity: </label>
                     <input type="number" value={qty === 0? "" : qty} placeholder="Enter Quantity" onChange={Quantity} required />
+
+                    {/* <select> 
+                        {Array.from({ length: 20 }, (_, i)=> i +1).map((num) => (
+                            <option value={num} key={num}></option>
+                        ))}
+                    </select> */}
                     <label>Item Name: </label>
                     <input type="text" value={name} placeholder="Enter Item" onChange={ItemName} required />
                     <button type="submit">Add</button>
