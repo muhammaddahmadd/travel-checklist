@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 
-function Items({ items, id }) {
+function Items({ name, id, quantity, detail, items }) {
     const [checked, setChecked] = useState({})
-    const [deleted, setDeleted] = useState(items);
-    console.log(items); 
+    const [deleted, setDeleted] = useState([...items]);
 
-    function handleChecked(id){
-        setChecked([{ ...checked, [id]: !checked[id] }])
+    
+    console.log(id); 
+
+    function handleChecked(id) {
+        const chec = []
+        setChecked(prevChecked => ({ ...prevChecked, [id]: !prevChecked[id] }));
     }
-    console.log(id)
 
-
-    function handleDel(){
-        // setDeleted(items.filter(item=> item.))
-    }
+    const handleDelete = (id) => {
+        setDeleted(deleted.filter(item => item.id !== id));
+    };
 
     return (
         <li>
             <input
                 type="checkbox"
                 checked={checked}
-                onChange={()=>handleChecked(id)}
+                onChange={() => handleChecked(id)}
             />
-            {items.qty} - {items.Name}({items.Detail})
-            <button className="close-icon" onClick={handleDel}>X</button>
+            {quantity} - {name}({detail})
+            <button className="close-icon" onClick={handleDelete}>X</button>
         </li>
     );
 }
