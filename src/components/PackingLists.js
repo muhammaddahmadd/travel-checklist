@@ -4,8 +4,6 @@ import Items from "./Items";
 
 function PackingLists({items}) {
    
-
-
     return (
         <div  className="list">
             <ul>

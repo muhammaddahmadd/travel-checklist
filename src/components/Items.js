@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 function Items({ items, id }) {
     const [checked, setChecked] = useState({})
-    console.log(items); // Just an example of using props inside the component
+    const [deleted, setDeleted] = useState(items);
+    console.log(items); 
 
     function handleChecked(id){
         setChecked([{ ...checked, [id]: !checked[id] }])
@@ -10,7 +11,10 @@ function Items({ items, id }) {
     console.log(id)
 
 
-    function handleDel(){}
+    function handleDel(){
+        // setDeleted(items.filter(item=> item.))
+    }
+
     return (
         <li>
             <input
@@ -18,7 +22,7 @@ function Items({ items, id }) {
                 checked={checked}
                 onChange={()=>handleChecked(id)}
             />
-            {items.Quantity} - {items.Item}
+            {items.qty} - {items.Name}({items.Detail})
             <button className="close-icon" onClick={handleDel}>X</button>
         </li>
     );
