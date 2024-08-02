@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 
@@ -29,10 +29,13 @@ function Logo(){
 
 
 function Form() {
+  const [num, setNum] = useState("")
+  const [name, setName] = useState("")
+  const [item, setItem] = useState([])
   return <form className="add-form">
 
-    <input type="number"/>
-    <input type="text" />
+    <input type="number" value={num}/>
+    <input type="text" value={name}/>
   </form>
 } 
 
