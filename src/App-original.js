@@ -32,10 +32,18 @@ function Form() {
   const [num, setNum] = useState("")
   const [name, setName] = useState("")
   const [item, setItem] = useState([])
-  return <form className="add-form">
 
-    <input type="number" value={num}/>
-    <input type="text" value={name}/>
+  function handleQuantity(e){
+    setNum(e.target.value)
+  }
+
+  function handleName(e){
+    setName(e.target.value)
+  }
+
+  return <form className="add-form">
+    <input type="number" value={num} onChange={handleQuantity}/>
+    <input type="text" value={name} onChange={handleName}/>
   </form>
 } 
 
