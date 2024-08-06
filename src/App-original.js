@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PackingLists from "./components/PackingLists";
+// import PackingLists from "./components/PackingLists";
 
 
 
@@ -62,11 +62,7 @@ function PackagingList({ items }) {
   return (
     <ul className="list">
       {items.map((x, index) => (
-        // <li key={index} id={x.id} className={`${checked? "underline" : ""}`}>
-        //   <input type="checkbox" onSelect={handleChecked}/>
-        //   {x.itemName} - {x.quantity}
-        // </li>
-
+    
         <Lst name={x.itemName} key={x.id} quantity={x.quantity} id={x.id}/>
       ))}
     </ul>
@@ -75,15 +71,9 @@ function PackagingList({ items }) {
 
 function Lst({name, quantity, id}){
   const [checked, setChecked] = useState(false);
-  // const [total, setTotal] = useState('')
+  // let packed = quantity.reduce((x, y) => x + y, 0)
  
-//   function totalQty(){
-//     if(quantity> 0){
-//     let sum = quantity.reduce((x,y)=> x+y, 0)
-//     setTotal(sum)
-// }
-//   }
-
+console.log(quantity)
   function handleChecked() {
     setChecked(!checked)
   }
@@ -92,7 +82,7 @@ function Lst({name, quantity, id}){
       <input type="checkbox" onChange={handleChecked} />
       {name} - {quantity}
     </li>
-    <Footer  />
+    <Footer packed={quantity} />
     </>
 }
 
