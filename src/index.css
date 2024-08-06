@@ -156,3 +156,7 @@ input[type="checkbox"] {
   line-height: 1;
   vertical-align: middle;
 }
+
+.underlined {
+  text-decoration: line-through;
+}
