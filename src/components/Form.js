@@ -25,7 +25,7 @@ function Form() {
     // console.log(qty, name)
 
     return (
-        <div>
+        <div className="add-form">
             <>
                 <form onSubmit={Submission}>
                     <label>Quantity: </label>
@@ -38,7 +38,7 @@ function Form() {
 
                 {
                     item.map((item, index) => (
-                        <Items item={item} key={index} />
+                        <Items item={item} />
                     )
                     )}
             </>

@@ -4,7 +4,7 @@ import React from "react";
 function Logo() {
     return (
         <header>
-            Packing list
+            <h1>Packing list</h1>
         </header>
     )
 }
