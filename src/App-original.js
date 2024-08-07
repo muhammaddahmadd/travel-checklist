@@ -11,7 +11,7 @@ function App() {
     <Logo/>
     <Form />
     {/* <PackagingList /> */}
-    <Footer/>
+    {/* <Footer/> */}
   </div>
   )
 }
@@ -63,17 +63,17 @@ function PackagingList({ items }) {
     <ul className="list">
       {items.map((x, index) => (
     
-        <Lst name={x.itemName} key={x.id} quantity={x.quantity} id={x.id}/>
+        <Lst items={items} name={x.itemName} key={x.id} quantity={x.quantity} id={x.id}/>
       ))}
     </ul>
   );
 }
 
-function Lst({name, quantity, id}){
+function Lst({name, quantity, id, items}){
   const [checked, setChecked] = useState(false);
-  // let packed = quantity.reduce((x, y) => x + y, 0)
- 
-console.log(quantity)
+  const total = items.reduce((total, item) => total + item.quantity, 0);
+  // const packedItems = items.filter((item) => item.id !== id || !checked);
+  // console.log(packed)
   function handleChecked() {
     setChecked(!checked)
   }
@@ -82,14 +82,20 @@ console.log(quantity)
       <input type="checkbox" onChange={handleChecked} />
       {name} - {quantity}
     </li>
-    <Footer packed={quantity} />
+   <div className="stats">
+   <p>   You have {total} total items & you have  item
+      </p>
+   </div>
     </>
 }
 
 
-function Footer({packed}) {
-  return <footer className="stats">You have {packed} packed items.</footer>
-}
+// function Footer({total}) {
+  // // 
+  // console.log(total)
+//   return <footer className="stats">
+ 
+// }
 
 
 export default App;
