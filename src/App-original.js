@@ -4,14 +4,17 @@ import React, { useState } from "react";
 
 
 function App() {
-
+  const [items, setItems] = useState([])
+  function handleItems(item) {
+    setItems(items => [...items, item])
+  }
   return (
   
   <div className="app">
     <Logo/>
-    <Form />
-    {/* <PackagingList /> */}
-    {/* <Footer/> */}
+    <Form  items={items} onAddItems={handleItems}/>
+    <PackagingList  items={items}/>
+    <Footer items={items}/>
   </div>
   )
 }
@@ -25,10 +28,10 @@ function Logo(){
 }
 
 
-function Form() {
-  const [items, setItems] = useState([])
-  const [num, setNum] = useState("")
+function Form({ items, onAddItems }) {
   const [name, setName] = useState("")
+  const [num, setNum] = useState("")
+
 const code = Date.now()
 
   function handleQuantity(e){
@@ -41,7 +44,9 @@ const code = Date.now()
 
   function handleSubmit(e){
     e.preventDefault()
-    setItems([...items, {itemName: name, quantity: num, id: code}])
+    // setItems([...items, {itemName: name, quantity: num, id: code}])
+    const item = { itemName: name, quantity: num, id: code }
+    onAddItems(item)
     setNum("")
     setName("")
   }
@@ -52,7 +57,7 @@ console.log(items)
       <input type="text" value={name} onChange={handleName} placeholder="Enter Name" />
       <button type="submit" >ADD</button>
     </form>
-    <PackagingList items={items}/>
+   
   </div>
   
 }
@@ -61,41 +66,37 @@ function PackagingList({ items }) {
 
   return (
     <ul className="list">
-      {items.map((x, index) => (
-    
+      {items.map((x) => (
         <Lst items={items} name={x.itemName} key={x.id} quantity={x.quantity} id={x.id}/>
       ))}
     </ul>
   );
 }
 
-function Lst({name, quantity, id, items}){
-  const [checked, setChecked] = useState(false);
-  const total = items.reduce((total, item) => total + item.quantity, 0);
-  // const packedItems = items.filter((item) => item.id !== id || !checked);
-  // console.log(packed)
-  function handleChecked() {
-    setChecked(!checked)
+function Lst({name, quantity, id}){
+  const [checked, setChecked] = useState([]);
+  function handleChecked(id) {
+    setChecked(checked=> [...checked, id])
   }
+console.log(checked)
   return <>
     <li className={`${checked ? "underlined" : ""}`}>
-      <input type="checkbox" onChange={handleChecked} />
-      {name} - {quantity}
+      <input type="checkbox" onChange={()=>handleChecked(id)} />
+      {name} - {quantity} ~ {id}
     </li>
-   <div className="stats">
-   <p>   You have {total} total items & you have  item
-      </p>
-   </div>
+  
     </>
 }
 
 
-// function Footer({total}) {
-  // // 
-  // console.log(total)
-//   return <footer className="stats">
- 
-// }
+function Footer({items}) {
+  const total = items.reduce((total, item) => total + item.quantity, 0);
+
+  return <footer className="stats">
+    <p>   You have {total} total items & you have packed item.
+    </p>
+  </footer>
+}
 
 
 export default App;
