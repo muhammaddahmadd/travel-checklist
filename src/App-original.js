@@ -84,6 +84,7 @@ console.log(checked)
     <li className={`${checked ? "underlined" : ""}`}>
       <input type="checkbox" onChange={()=>handleChecked(id)} />
       {name} - {quantity} ~ {id}
+      {/* <button>x</button> */}
     </li>
   
     </>
