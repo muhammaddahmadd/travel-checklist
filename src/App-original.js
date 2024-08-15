@@ -76,7 +76,7 @@ function PackagingList({ items }) {
 function Lst({ name, quantity, id, items }){
   const [checked, setChecked] = useState([]);
   function handleChecked(id) {
-    setChecked(checked !== id? [...checked, id]: "")
+    // setChecked(items=>items.filter(items.id !== id? id : ))
   
   }
 console.log(checked)
