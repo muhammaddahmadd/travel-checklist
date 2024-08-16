@@ -29,24 +29,19 @@ console.log(totalItems)
     setItem(items=>items.filter(item=>item.id !== id))
   }
   return (
-  
   <div className="app">
     <Logo/>
       <Form onSubmit={handleSubmission} name={name} num={num} onAddNum={handleNum} onAddName={handleName} />
     <PackagingList items={items} onDel={handleDel}/>
     <Footer total={totalItems}/>
   </div>
-  
-  
   )
-
-
-
 }
 
 function Logo(){
   return <header>
-    <h1>Logo
+    <h1>
+      CheckList
     </h1>
     </header>
 }
