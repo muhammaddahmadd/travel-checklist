@@ -8,12 +8,18 @@ function App() {
   function handleItems(item) {
     setItems(items => [...items, item])
   }
+
+  function handleDelteItem(id){
+    setItems(items => items.filter(item => item.id !== id));
+
+  }
+
+
   return (
-  
   <div className="app">
     <Logo/>
     <Form  items={items} onAddItems={handleItems}/>
-    <PackagingList  items={items}/>
+    <PackagingList onDel={handleDelteItem}  items={items}/>
     <Footer items={items}/>
   </div>
   )
@@ -62,32 +68,33 @@ console.log(items)
   
 }
 
-function PackagingList({ items }) {
+function PackagingList({ items, onDel }) {
 
   return (
     <ul className="list">
       {items.map((x) => (
-        <Lst items={items} name={x.itemName} key={x.id} quantity={x.quantity} id={x.id}/>
+        <Lst items={items} name={x.itemName} onDel={onDel} key={x.id} quantity={x.quantity} id={x.id}/>
       ))}
     </ul>
   );
 }
 
-function Lst({ name, quantity, id, items }){
+function Lst({ name, quantity, id, items, onDel }){
   const [checked, setChecked] = useState([]);
   function handleChecked(id) {
     // setChecked(items=>items.filter(items.id !== id? id : ))
   
   }
 console.log(checked)
-  return <>
-    <li className={`${checked ? "underlined" : ""}`}>
-      <input type="checkbox" onChange={()=>handleChecked(id)} />
-      {name} - {quantity} ~ {id}
-      {/* <button>x</button> */}
+  return <li >
+      <span>  
+        <input type="checkbox" onChange={() => handleChecked(id)} />
+        {name} - {quantity}
+        </span>
+      <button onDel={onDel}>X</button>
     </li>
   
-    </>
+
 }
 
 
