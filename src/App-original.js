@@ -24,9 +24,14 @@ function App() {
 console.log(items)
 
   const totalItems = Number(items.reduce((x, y) => x + y.num, 0))
-  const checking = items.map((item)=> item.packed? item.num: "")
-  const totalPackedItems =checking.reduce((a,b)=> a + b.num,0)
-  console.log(totalPackedItems)
+  const packeditems = items.filter(item=> item.packed? item.packed :"")
+  console.log(packeditems)
+  const totalPackedItems = items.reduce((total, item) => {
+    return item.packed ? total + item.num : total;
+  }, 0);
+  // const checking = items.map((item)=> item.packed? item.num: "")
+  // const totalPackedItems =checking.reduce((a,b)=> a + b.num,0)
+  // console.log(totalPackedItems)
 
 function handleSubmission(e) {
     e.preventDefault()
@@ -117,7 +122,7 @@ function List({ item, name, num, onDel, onToggleItem, id, onTgl, packed }) {
 function Footer({ total, totalPackedItems }) {
   console.log(totalPackedItems)
   return <footer className="stats">
-    {total > 0 ? `You have total ${total} items and  you have packed ${totalPackedItems === isNaN ? 0 : totalPackedItems} items` : "Please start adding items"}
+    {total > 0 ? `You have total ${total} items and  you have packed ${totalPackedItems} items` : "Please start adding items"}
      </footer>
 }
 
