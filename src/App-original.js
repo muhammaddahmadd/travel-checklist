@@ -6,8 +6,8 @@ function App() {
   const [items, setItem] = useState([])
   const [num, setNum] = useState("");
   const [name, setName] = useState("")
-
-
+  const totalItems = Number(items.reduce((x, y) => x + y.num, 0))
+console.log(totalItems)
   function handleSubmission(e) {
     e.preventDefault()
     setItem([...items, { name: name, num: num, id: Date.now() }])
@@ -34,7 +34,7 @@ function App() {
     <Logo/>
       <Form onSubmit={handleSubmission} name={name} num={num} onAddNum={handleNum} onAddName={handleName} />
     <PackagingList items={items} onDel={handleDel}/>
-    <Footer/>
+    <Footer total={totalItems}/>
   </div>
   
   
