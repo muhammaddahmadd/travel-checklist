@@ -6,9 +6,29 @@ function App() {
   const [items, setItem] = useState([])
   const [num, setNum] = useState("");
   const [name, setName] = useState("")
+  const [packed, setPacked] = useState(false)
+
+  function itemPacked(id) {
+    console.log(id)
+    setPacked(packed => {
+      const newPacked = !packed;
+      setItem(items =>
+        items.map(item =>
+          item.id === id ? { ...item, packed: newPacked } : item
+        )
+      );
+      return newPacked;
+    }) 
+     
+  }
+console.log(items)
+
   const totalItems = Number(items.reduce((x, y) => x + y.num, 0))
-console.log(totalItems)
-  function handleSubmission(e) {
+  const checking = items.map((item)=> item.packed? item.num: "")
+  const totalPackedItems =checking.reduce((a,b)=> a + b.num,0)
+  console.log(totalPackedItems)
+
+function handleSubmission(e) {
     e.preventDefault()
     setItem([...items, { name: name, num: num, id: Date.now() }])
     setName("")
@@ -16,7 +36,7 @@ console.log(totalItems)
   }
 
   function handleNum(e) {
-    setNum(e.target.value)
+    setNum(Number(e.target.value))
 
   }
 
@@ -25,15 +45,25 @@ console.log(totalItems)
   }
 
   function handleDel(id){
-    // console.log(id)
     setItem(items=>items.filter(item=>item.id !== id))
   }
+  function handleToggle(id) {
+    setItem(items =>
+      items.map(item =>
+        item.id === id ? { ...item, packed: packed} : item
+      )
+    );
+    console.log(id)
+  }
+
+
+
   return (
   <div className="app">
     <Logo/>
       <Form onSubmit={handleSubmission} name={name} num={num} onAddNum={handleNum} onAddName={handleName} />
-    <PackagingList items={items} onDel={handleDel}/>
-    <Footer total={totalItems}/>
+      <PackagingList items={items} packed={packed} onDel={handleDel} onToggleItem={handleToggle} onTgl={itemPacked}/>
+      <Footer total={totalItems} totalPackedItems={totalPackedItems}/>
   </div>
   )
 }
@@ -57,25 +87,25 @@ function Form({ onSubmit, onAddName, onAddNum, num, name}) {
 } 
 
 
-function PackagingList({items, onDel}) {
+function PackagingList({ items, onDel, onToggleItem, onTgl, packed }) {
 
   return (
     <ul className="list">
       {items.map((item) => (
-        <List name={item.name} onDel={onDel} key={item.id} id={item.id} num={item.num}/>
+        <List name={item.name} onTgl={onTgl} packed={packed} item={item} onToggleItem={onToggleItem} onDel={onDel} key={item.id} id={item.id} num={item.num}/>
       ))}
     </ul>
   )
 } 
 
 
-function List({name, num, onDel,id}) {
+function List({ item, name, num, onDel, onToggleItem, id, onTgl, packed }) {
 
 
 
   return <li className="">
     <span>
-      <input type="checkbox" />
+      <input type="checkbox" value={packed} onChange={() => onTgl(id)}/>
       {num} - {name}
     </span>
     <button className="close-button" onClick={()=>onDel(id)}>X</button>
@@ -84,8 +114,11 @@ function List({name, num, onDel,id}) {
 
 
 
-function Footer() {
-  return <footer className="stats">Total number of items: ${""} </footer>
+function Footer({ total, totalPackedItems }) {
+  console.log(totalPackedItems)
+  return <footer className="stats">
+    {total > 0 ? `You have total ${total} items and  you have packed ${totalPackedItems === isNaN ? 0 : totalPackedItems} items` : "Please start adding items"}
+     </footer>
 }
 
 
