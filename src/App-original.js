@@ -20,11 +20,12 @@ function App() {
 
   function handleSubmission(e) {
     e.preventDefault();
+  
 const existingItem = items.some(item=>item.name.toLowerCase() === name.toLowerCase() );
 if (existingItem) {
   alert("Item already exists");
-}
-else {
+} else if(!name.length) return
+else  {
   setItem([...items, { name: name, num: Number(num), id: Date.now(), packed: false }]);
 }
     setName("");
