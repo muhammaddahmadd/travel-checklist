@@ -13,6 +13,15 @@ function App() {
     );
   }
 
+  function handleClear(){
+    const answer = prompt("Are you sure you want to clear the list: Y/N")
+    console.log(answer)
+    if(answer.toLocaleLowerCase() ===  "y"){
+      setItem([])
+    }
+    console.log("clicking..")
+  }
+
   const totalItems = items.reduce((x, y) => x + Number(y.num), 0);
   const totalPackedItems = items.reduce((total, item) => {
     return item.packed ? total + Number(item.num) : total;
@@ -49,7 +58,7 @@ function App() {
     <div className="app">
       <Logo />
       <Form onSubmit={handleSubmission} name={name} num={num} onAddNum={handleNum} onAddName={handleName} />
-      <PackagingList items={items} onDel={handleDel} onToggleItem={itemPacked} />
+      <PackagingList items={items} onDel={handleDel} onToggleItem={itemPacked} onClear={handleClear} />
       <Footer total={totalItems} totalPackedItems={totalPackedItems} />
     </div>
   );
@@ -73,7 +82,7 @@ function Form({ onSubmit, onAddName, onAddNum, num, name }) {
   );
 }
 
-function PackagingList({ items, onDel, onToggleItem }) {
+function PackagingList({ items, onDel, onToggleItem, onClear }) {
 
   const [sortBy, setSortBy] = useState("input");
 
@@ -82,12 +91,16 @@ function PackagingList({ items, onDel, onToggleItem }) {
   }
 
   let sortedItems;
-  if (sortBy === "input") sortedItems=items
+  if (sortBy === "input") sortedItems=items;
+  if (sortBy === "num-asc") sortedItems = items.slice().sort((a, b) => Number(a.num) - Number(b.num));
+   if (sortBy === "num-desc") sortedItems = items.slice().sort((a, b) => Number(b.num) - Number(a.num));
+  if (sortBy === "name") sortedItems = items.slice().sort((a, b) => a.name.toLocaleLowerCase().localeCompare(b.name.toLocaleLowerCase()));
+  if (sortBy === "packed") sortedItems = items.slice().sort((a, b) => Number(a.packed) - Number(b.packed));
 
   return (
     <div className="list">
     <ul>
-      {items.map(item => (
+        {sortedItems.map(item => (
         <List
           name={item.name}
           packed={item.packed}
@@ -103,12 +116,14 @@ function PackagingList({ items, onDel, onToggleItem }) {
       <div className="actions">
       <select onChange={handleSorting}>
         <option value="input">sort by user input</option>
-          <option value="num">sort by quantity</option>
+          <option value="num-asc">sort by quantity (Ascending order)</option>
+          <option value="num-desc">sort by quantity (Descending order)</option>
           <option value="name">sort by alphabetical order</option>
           <option value="packed">sort by packed</option>
       </select>
+        <button onClick={onClear} disabled={items.length <= 0}>Clear List</button>
       </div>
-
+     
     </div>
   );
 }
