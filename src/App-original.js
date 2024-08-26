@@ -74,8 +74,19 @@ function Form({ onSubmit, onAddName, onAddNum, num, name }) {
 }
 
 function PackagingList({ items, onDel, onToggleItem }) {
+
+  const [sortBy, setSortBy] = useState("input");
+
+  function handleSorting(e){
+  setSortBy(e.target.value)
+  }
+
+  let sortedItems;
+  if (sortBy === "input") sortedItems=items
+
   return (
-    <ul className="list">
+    <div className="list">
+    <ul>
       {items.map(item => (
         <List
           name={item.name}
@@ -89,6 +100,16 @@ function PackagingList({ items, onDel, onToggleItem }) {
         />
       ))}
     </ul>
+      <div className="actions">
+      <select onChange={handleSorting}>
+        <option value="input">sort by user input</option>
+          <option value="num">sort by quantity</option>
+          <option value="name">sort by alphabetical order</option>
+          <option value="packed">sort by packed</option>
+      </select>
+      </div>
+
+    </div>
   );
 }
 
