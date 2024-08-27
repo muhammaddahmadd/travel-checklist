@@ -30,18 +30,24 @@ export default function Exercise() {
 function Accordion() {
     return <div className="accordion">
         {faqs.map((faq, i)=> (
-            <AccordionItem key={i} title={faq.title} text={faq.text}/>
+            <AccordionItem key={i} id={i+1} title={faq.title} text={faq.text}/>
         ))}
     </div>;
 }
 
 
-function AccordionItem({key, title, text}){
-    const [open, setOpen] = useState(false);
+function AccordionItem({id, title, text}){
+    const [isOpen, setIsOpen] = useState(false);
 
-    return <div className="item">
-        <p>{key}</p>
-        <p>{title}</p>
-        <p>{"+"}</p>
+
+   function handleOpening(){
+    setIsOpen(!isOpen)
+   }
+
+    return <div className={"item " + `${isOpen? "open": ""}`} onClick={handleOpening}>
+        <p className="number">{id}</p>
+        <p className="title">{title}</p>
+        <p className="icon">{isOpen? "-" : "+"}</p>
+        {isOpen? <p className="content-box">{text}</p>  : ""}
     </div>
 }
