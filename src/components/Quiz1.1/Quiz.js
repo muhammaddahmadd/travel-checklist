@@ -11,9 +11,16 @@ function Quiz(){
 }
 
 function Form(){
+    // const [myName] = useState(prompt("Enter your Name").toLocaleLowerCase())
+    // const [friedName] = useState(prompt("Enter your Friend's Name").toLocaleLowerCase())
 const [amount, setAmount] = useState("")
-const [myExp, setMyExp] = useState("okay")
+const [myExp, setMyExp] = useState("")
 const [friendExp, setfriendExp] = useState("")
+
+// const myName = prompt("Enter your Name").toLocaleLowerCase();
+// const friendName = prompt("Enter your Friend's Name").toLocaleLowerCase();
+    const myName = "Ahmad";
+    const friedName = "Khan";
 
 
     function handleAmount(e){
@@ -42,11 +49,12 @@ const [friendExp, setfriendExp] = useState("")
 
 
     return <div className="">
+        
         <label>How much was the bill?</label>
         <input type="number" value={amount} onChange={handleAmount} placeholder="enter amount" />
             <br></br>
 
-        <label>How did you like the service?</label>
+        <label>How did you like the service, `Mr {myName}`?</label>
         <select value={myExp} onChange={handleMine}>
             <option value="okay">Okay</option>
             <option value="good">Good</option>
@@ -55,7 +63,7 @@ const [friendExp, setfriendExp] = useState("")
 
 
         <br></br>
-        <label>How did your friend like the service?</label>
+        <label>How did your friend like the service, `Mr {friedName}`?</label>
         <select value={friendExp} onChange={handleFren} >
             <option value="okay">Okay</option>
             <option value="good">Good</option>
@@ -64,16 +72,14 @@ const [friendExp, setfriendExp] = useState("")
 
         {amount && <div>
             <p>Your bill : `{amount}$`</p>
-            <p>Your tip : `{exp}$`</p>
-            <p>Your Friend tip : `{fexp}$`</p>
-            <p>Total Paid: `{amount + exp + fexp}$`</p>
+            {<p>`{myName} Tip` : `{exp <= 0  || exp === undefined?  "Please select your tip": exp + "$" }`</p>}
+            <p>`{friedName} Tip` : `{fexp <= 0 || fexp === undefined ? "Please select your tip" : fexp + "$"}`</p>
+            {!isNaN(exp) && !isNaN(fexp)? <p>Total Paid: `{amount + exp + fexp}$`</p> : "" }
         </div>}
     </div>
 
-}
 
-
-
+        }
 
 
 
