@@ -12,8 +12,8 @@ function Quiz(){
 
 function Form(){
 const [amount, setAmount] = useState("")
-const [myExp, setMyExp] = useState("null")
-const [frenExp, setFrenExp] = useState("null")
+const [myExp, setMyExp] = useState("okay")
+const [friendExp, setfriendExp] = useState("")
 
 
     function handleAmount(e){
@@ -26,18 +26,19 @@ const [frenExp, setFrenExp] = useState("null")
         setMyExp(e.target.value)
     }
     function handleFren(e) {
-        setFrenExp(e.target.value)
+        setfriendExp(e.target.value)
+
     }
 
     let exp;
-    if (myExp === "okay") exp = amount;
+    if (myExp === "okay") exp = 0;
     if (myExp === "good")  exp = (amount * 10)/100 ;
     if (myExp === "excellent")  exp = (amount * 20) / 100 ;
    
-    let frexp;
-    if (frenExp === "okay") frexp = amount;
-    if (frenExp === "good") frexp = (amount * 10) / 100 ;
-    if (frenExp === "excellent") frexp = (amount * 20) / 100 ;
+    let fexp;
+    if (friendExp === "okay") fexp = 0;
+    if (friendExp === "good") fexp = (amount * 10) / 100 ;
+    if (friendExp === "excellent") fexp = (amount * 20) / 100 ;
 
 
     return <div className="">
@@ -55,7 +56,7 @@ const [frenExp, setFrenExp] = useState("null")
 
         <br></br>
         <label>How did your friend like the service?</label>
-        <select onChange={handleFren} value={frenExp}>
+        <select value={friendExp} onChange={handleFren} >
             <option value="okay">Okay</option>
             <option value="good">Good</option>
             <option value="excellent">Excellent</option>
@@ -64,8 +65,8 @@ const [frenExp, setFrenExp] = useState("null")
         {amount && <div>
             <p>Your bill : `{amount}$`</p>
             <p>Your tip : `{exp}$`</p>
-            <p>Your Friend tip : `{frenExp}$`</p>
-            <p>Total Paid: `{amount + exp + frenExp}$`</p>
+            <p>Your Friend tip : `{fexp}$`</p>
+            <p>Total Paid: `{amount + exp + fexp}$`</p>
         </div>}
     </div>
 
