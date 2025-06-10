@@ -8,6 +8,7 @@ function Footer({ items }) {
   return (
     <footer className="stats">
       <h3>
+        
         {percentage === 100
           ? "You have Packed Everything!!"
           : `You have ${itemLength} items on your list, and you already packed ${count} item  percentage ${percentage}%`}
