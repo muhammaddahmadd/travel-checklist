@@ -14,7 +14,6 @@ function App() {
   function handleDel(id) {
     setItems(() => items.filter((item) => item.id !== id));
   }
-
   function toggleItem(id) {
     setItems((items) =>
       items.map((item) =>
